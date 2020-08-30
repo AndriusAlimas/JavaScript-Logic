@@ -119,31 +119,34 @@ console.log("Answer array:", myArray);
 // 1:
 console.log("************** -2- ****************");
 myArray = [1,2,3];
-let target = 4;
+let target = 5;
 console.log("Original array:", myArray);
 console.log("Target:", target);
 
+/* this function takes array and target as arguments. 
+Find two  different numbers in the array that, when 
+added together, give the target number. */
+
 const targetSumArray = (array, target) =>{
-  
+  // first we sort array by natural order
   sortArray(myArray);
   
-  for(let i =array.length -1; i > 0; i--){
-    let result = 0;
-    let current = array[i];
-    let next = array[i-1];
-    console.log(current);
-    console.log(next);
-   if(array[i] > target){
-     continue;
-   }else{
-     result = current + next;
-     console.log("result", result);
-     if(result < 0){
-        
-     }
-   }
+  let answer = [];
+  let lowIndex = 0;
+  let highIndex = array.length - 1;
+  
+  while(lowIndex < highIndex){
+    let sum = array[lowIndex] + array[highIndex]; // we add first(smallest) and last item(highest)
+    if(sum > target){ 
+      highIndex--;
+    }else if(sum < target){
+      lowIndex++;
+    }else{
+      answer.push(array[lowIndex]);
+      answer.push(array[highIndex]);
+      return answer;
+    }
   }
-  return result;
 }
 answer = targetSumArray(myArray,target);
 console.log(answer);
